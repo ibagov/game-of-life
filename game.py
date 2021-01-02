@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import random
 
 
 class GridTooSmall(Exception):
@@ -9,13 +8,9 @@ class GridTooSmall(Exception):
 
 class Grid:
 
-    MIN_GRID_SIZE = 20
-    DEFAULT_HEIGHT = 30
-    DEFAULT_WIDTH = 30
-
-    preset_patterns = {'blinker': [[0, 0, 0],
-                                   [1, 1, 1],
-                                   [0, 0, 0]]}
+    MIN_GRID_SIZE = 30
+    DEFAULT_HEIGHT = 50
+    DEFAULT_WIDTH = 50
 
     def __init__(self, height=DEFAULT_HEIGHT, width=DEFAULT_WIDTH, pattern=None):
 
@@ -31,20 +26,13 @@ class Grid:
     @staticmethod
     def _choose_pattern(pattern_choice):
 
-        if pattern_choice is None:
-            # Choose an initial pattern at random
-            initial_pattern = np.array(random.choice(list(Grid.preset_patterns.values())))
-
-        elif isinstance(pattern_choice, str):
-            # Load a specific initial pattern
-            initial_pattern = np.array(Grid.preset_patterns[pattern_choice.lower()])
-
-        elif isinstance(pattern_choice, list):
+        if isinstance(pattern_choice, list) or isinstance(pattern_choice, np.ndarray):
             # Load a manually given pattern
             initial_pattern = np.array(pattern_choice)
 
         else:
             # Load a random 3x3 pattern
+            print('Invalid initial pattern choice. Loading random pattern.')
             initial_pattern = np.random.choice([0, 1], size=(3, 3))
 
         return initial_pattern
