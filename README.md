@@ -1,5 +1,5 @@
 # game-of-life
- Python implementation of Conway's Game of Life
+ Python implementation of Conway's Game of Life.
 
 # Getting started
  To install the required packages run `pip install -r requirements.txt` from the project's directory
